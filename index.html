@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="description" content="Проект Mesto: базовая функциональность">
+   <meta name="author" content="Anna Gorgulenko">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="./pages/index.css">
+   <link rel="shortcut icon"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAVFBMVEUAAAD///8GBgb19fWEhIQFBQW+vr7V1dVkZGT5+fkpKSl+fn78/PyIiIjQ0NDs7Ozb29uQkJBfX1+3t7cTExMrKysdHR1xcXHr6+syMjJDQ0OXl5d6TcMKAAABqElEQVR4nO3c3W7aQBCA0TXGKa4NJOSvSd7/PYvTUFKpF53gdtbNOfeM+LTGeJHYUgAAAAAAAAAAAAAAAAD4H3Srj+iy3zafyKo8Xu++RO2uH4+vXIZVuWk+4mZBhcO4b6O+jcOCCtdNH17BvlkvqrANF7YKK6Lw9xb3ORyjlrWGQ9P2UftmSd8WL+FrdPKymMKuPG0Om6jD5qnYXdTD/hAg6v2dc4Zx7q7/XFeet8P61bA9XPpY0nVlcx73XMVTzi9Pobty4ZXVrcqutifVaSfx9rvTfrydFuESx5ffnn7GqmW38W6/2zZXM6zh1XlcHTtGhTEKMyiMUZhBYYzCDApjFGZQGKMwg8IYhRkUxijMoDBGYQaFMQozKIxRmEFhjMIMCmMUZlAYozCDwhiFGRTGKMygMEZhBoUxCjMojFGYQWGMwgwKYxRm+ByF/V8prOU8l6lwfzqeZJb/H57H1fL/w23T/zhipj+u4aWF0xr+HLetpXA8nUjWz3KV9qdxYx2Fpdzdf31z/zDDuIfzuLsZxvEnnDgAAAAAAAAAAAAAAAAAAADEfAd32yLHf2pLeAAAAABJRU5ErkJggg==">
+   <title>Mesto</title>
+</head>
+
+<body class="root">
+   <div class="page">
+      <!-- НАЧАЛО -->
+      <!-- начало HEADER -->
+      <header class="header">
+         <img class="header__logo" src="./images/header_logo.png" alt="Логотип Mesto Russia">
+      </header>
+      <!-- конец HEADER -->
+      <!-- начало CONTENT -->
+      <main class="content">
+         <!-- начало PROFILE -->
+         <section class="profile">
+            <div class="profile__container">
+               <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Изображенно фото Жак-Ив Кусто">
+               <div class="profile__info">
+                  <h1 class="profile__title">Жак-Ив Кусто</h1>
+                  <button class="profile__edit-button" id="myBtn" type="button"></button>
+                  <p class="profile__subtitle">Исследователь океана</p>
+               </div>
+            </div>
+            <button class="profile__add-button" type="button"></button>
+         </section>
+         <!-- конец PROFILE -->
+         <!-- начало POPUP -->
+         <div class="popup">
+            <div class="popup__container">
+               <button class="popup__close" type="button"></button>
+               <h2 class="popup__title">Редактировать профиль</h2>
+               <form class="popup__form" name="editForm">
+                  <fieldset class="popup__fieldset" id="form">
+                     <input type="text" class="popup__input popup__input_type_name" name="nameInput"
+                        placeholder="Жак-Ив Кусто">
+                     <input type="text" class="popup__input popup__input_type_job" name="jobInput"
+                        placeholder="Исследователь океана">
+                  </fieldset>
+                  <button class="popup__save" type="submit">Сохранить</button>
+               </form>
+            </div>
+         </div>
+         <!-- конец POPUP -->
+         <!-- начало ELEMENTS -->
+         <section class="elements">
+            <div class="element">
+               <img class="element__mask" src="./images/United_Kingdom.jpg" alt="На изображении берег Англии">
+               <div class="element__group">
+                  <h2 class="element__title">Англия</h2>
+                  <button class="element__like-button" type="button"></button>
+               </div>
+            </div>
+            <div class="element">
+               <img class="element__mask" src="./images/Maldives.jpg" alt="На изображении берег с пальмами">
+               <div class="element__group">
+                  <h2 class="element__title">Мальдивы</h2>
+                  <button class="element__like-button" type="button"></button>
+               </div>
+            </div>
+            <div class="element">
+               <img class="element__mask" src="./images/USA.jpg" alt="На изображении рассвет на берегу океана">
+               <div class="element__group">
+                  <h2 class="element__title">США</h2>
+                  <button class="element__like-button" type="button"></button>
+               </div>
+            </div>
+            <div class="element">
+               <img class="element__mask" src="./images/Hawaii.jpg" alt="На изображении закат на берегу океана">
+               <div class="element__group">
+                  <h2 class="element__title">Гавайи</h2>
+                  <button class="element__like-button" type="button"></button>
+               </div>
+            </div>
+            <div class="element">
+               <img class="element__mask" src="./images/Egypt.jpg" alt="На изображении подводный мир Красного моря">
+               <div class="element__group">
+                  <h2 class="element__title">Египет</h2>
+                  <button class="element__like-button" type="button"></button>
+               </div>
+            </div>
+            <div class="element">
+               <img class="element__mask" src="./images/Mexico.jpg" alt="На изображении скалы в воде">
+               <div class="element__group">
+                  <h2 class="element__title">Мексика</h2>
+                  <button class="element__like-button" type="button"></button>
+               </div>
+            </div>
+         </section>
+         <!-- конец ELEMENTS -->
+      </main>
+      <!-- конец CONTENT -->
+      <!-- начало FOOTER -->
+      <footer class="footer">
+         <p class="footer__copyright">&copy; 2022. Горгуленко Анна</p>
+      </footer>
+      <!-- конец FOOTER -->
+   </div>
+   <script src="./scripts/index.js"></script>
+</body>
+
+</html>
