@@ -1,20 +1,7 @@
 .profile__avatar {
    display: block;
    border-radius: 50%;
-   max-width: 120px;
-   max-height: 120px;
+   width: 120px;
+   height: 120px;
+   object-fit: contain;
 }
-
-   @media screen and (max-width: 680px) {
-      .profile__avatar {
-      max-width: 240px;
-      max-height: 240px;
-      }
-   }
-   
-   @media screen and (max-width: 440px) {
-      .profile__avatar {
-      max-width: 120px;
-      max-height: 120px;
-      }
-   }

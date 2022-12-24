@@ -4,13 +4,14 @@
    display: block;
    background-color: transparent;
    border: none;
-   background-image: url(../../../images/heart.jpg);
+   background-image: url(../../../images/heart.svg);
    width: 22px;
    height: 19px;
    cursor: pointer;
+   outline: none;
 }
 
 .element__like-button:hover {
-   opacity: 0.6;
+   opacity: 0.5;
    transition: 0.5s ease-in-out;
  }

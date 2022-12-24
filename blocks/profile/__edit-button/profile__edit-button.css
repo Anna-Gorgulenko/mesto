@@ -10,6 +10,7 @@
    top: 34px;
    right: 0;
    cursor: pointer;
+   outline: none;
 }
 
 .profile__edit-button:hover {
@@ -23,7 +24,7 @@
       }
    }
    
-   @media screen and (max-width: 455px) {
+/*    @media screen and (max-width: 455px) {
       .profile__edit-button {
       right: -60px;
       }
@@ -33,23 +34,22 @@
       .profile__edit-button {
       right: 30px;
       }
-   }
+   } */
    
-   @media screen and (max-width: 375px) {
+/*    @media screen and (max-width: 375px) {
       .profile__edit-button {
-      background-image: url(../../../images/Edit\ Button.png);
       width: 18px;
       height: 18px;
       top: 33px;
       right: 55px;
       }
-   }
+   } */
    
-   @media screen and (max-width: 360px) {
+ /*   @media screen and (max-width: 360px) {
       .profile__edit-button {
       right: 20px;
       }
-   }
+   } */
    
    @media screen and (max-width: 320px) {
       .profile__edit-button {

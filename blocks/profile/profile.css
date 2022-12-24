@@ -16,26 +16,28 @@
    @media screen and (max-width: 768px) {
       .profile {
       max-width: 568px;
-      padding: 40px 100px 0 100px;
+      padding-right: 100px;
+      padding-left: 100px;
       }
    }
    
-   @media screen and (max-width: 440px) {
+   @media screen and (max-width: 450px) {
       .profile {
       padding: 40px 37px 0 37px;
       }
    }
    
-   @media screen and (max-width: 400px) {
+/*    @media screen and (max-width: 400px) {
       .profile {
       padding: 40px 17px 0 17px;
       }
-   }
+   } */
    
-   @media screen and (max-width: 320px) {
+   @media screen and (max-width: 300px) {
       .profile {
       max-width: 282px;
-      padding: 42px 19px 0 19px;
-      flex-direction: column;
+      padding-top: 42px;
+      padding-right: 19px;
+      padding-left: 19px;
       }
    }

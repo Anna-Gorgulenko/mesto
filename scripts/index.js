@@ -22,7 +22,6 @@ function openPopup() {
 // Обработчик «закрытия» формы
 function closePopup() {
     popup.classList.remove('popup_opened');
-    console.log(closeBtn);
 }
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
