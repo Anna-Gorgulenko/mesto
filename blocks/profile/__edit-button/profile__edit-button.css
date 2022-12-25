@@ -11,6 +11,7 @@
    right: 0;
    cursor: pointer;
    outline: none;
+   background-size: cover;
 }
 
 .profile__edit-button:hover {
@@ -18,41 +19,10 @@
    transition: 0.5s ease-in-out;
 }
  
-   @media screen and (max-width: 515px) {
-      .profile__edit-button {
-      right: -30px;
-      }
-   }
-   
-/*    @media screen and (max-width: 455px) {
-      .profile__edit-button {
-      right: -60px;
-      }
-   }
-   
-   @media screen and (max-width: 440px) {
-      .profile__edit-button {
-      right: 30px;
-      }
-   } */
-   
-/*    @media screen and (max-width: 375px) {
+   @media screen and (max-width: 320px) {
       .profile__edit-button {
       width: 18px;
       height: 18px;
-      top: 33px;
-      right: 55px;
-      }
-   } */
-   
- /*   @media screen and (max-width: 360px) {
-      .profile__edit-button {
-      right: 20px;
-      }
-   } */
-   
-   @media screen and (max-width: 320px) {
-      .profile__edit-button {
       top: 30px;
       right: 39px;
       }

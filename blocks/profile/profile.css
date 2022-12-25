@@ -21,23 +21,18 @@
       }
    }
    
-   @media screen and (max-width: 450px) {
+   @media screen and (max-width: 550px) {
       .profile {
       padding: 40px 37px 0 37px;
       }
    }
-   
-/*    @media screen and (max-width: 400px) {
-      .profile {
-      padding: 40px 17px 0 17px;
-      }
-   } */
-   
-   @media screen and (max-width: 300px) {
+ 
+   @media screen and (max-width: 320px) {
       .profile {
       max-width: 282px;
       padding-top: 42px;
       padding-right: 19px;
       padding-left: 19px;
+      flex-direction: column;
       }
    }

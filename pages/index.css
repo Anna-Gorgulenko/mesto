@@ -1,8 +1,6 @@
 @import url("../vendor/normalize.css");
 
-@import url("../vendor/fonts/Inter-Black.woff");
-@import url("../vendor/fonts/Inter-Bold.woff");
-@import url("../vendor/fonts/Inter-Regular.woff");
+@import url("../vendor/fonts/inter.css");
 
 @import url("../blocks/root/root.css");
 

@@ -20,19 +20,12 @@
       }
    }
    
-/*    @media screen and (max-width: 375px) {
-      .profile__title {
-      font-size: 30px;
-      line-height: 36px;
-      }
-   } */
-   
-   @media screen and (max-width: 320px) {
+   @media screen and (max-width: 400px) {
       .profile__title {
       font-size: 27px;
       line-height: 33px;
       max-width: 189px;
-      padding-bottom: 8px;
+      padding-top: 8px;
       align-self: center;
       }
    }

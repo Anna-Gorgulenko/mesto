@@ -13,7 +13,6 @@
    @media screen and (max-width: 550px) {
       .elements {
       column-gap: 0px;
-      row-gap: 20px;
       }
    }
    
