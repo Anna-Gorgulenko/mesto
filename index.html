@@ -27,80 +27,65 @@
          <div class="profile__container">
             <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Изображенно фото Жак-Ив Кусто">
             <div class="profile__info">
-               <h1 class="profile__title">Жак-Ив Кусто</h1>
+               <h1 class="profile__title" id="name-about">Жак-Ив Кусто</h1>
                <button class="profile__edit-button" id="myBtn" type="button"></button>
-               <p class="profile__subtitle">Исследователь океана</p>
+               <p class="profile__subtitle" id="profile-about">Исследователь океана</p>
             </div>
          </div>
-         <button class="profile__add-button" type="button"></button>
+         <button class="profile__add-button" type="button" id="add-card"></button>
       </section>
       <!-- конец PROFILE -->
       <!-- начало ELEMENTS -->
-      <section class="elements">
-         <article class="element">
-            <img class="element__mask" src="./images/United_Kingdom.jpg" alt="На изображении берег Англии">
-            <div class="element__group">
-               <h2 class="element__title">Англия</h2>
-               <button class="element__like-button" type="button"></button>
-            </div>
-         </article>
-         <article class="element">
-            <img class="element__mask" src="./images/Maldives.jpg" alt="На изображении берег с пальмами">
-            <div class="element__group">
-               <h2 class="element__title">Мальдивы</h2>
-               <button class="element__like-button" type="button"></button>
-            </div>
-         </article>
-         <article class="element">
-            <img class="element__mask" src="./images/USA.jpg" alt="На изображении рассвет на берегу океана">
-            <div class="element__group">
-               <h2 class="element__title">США</h2>
-               <button class="element__like-button" type="button"></button>
-            </div>
-         </article>
-         <article class="element">
-            <img class="element__mask" src="./images/Hawaii.jpg" alt="На изображении закат на берегу океана">
-            <div class="element__group">
-               <h2 class="element__title">Гавайи</h2>
-               <button class="element__like-button" type="button"></button>
-            </div>
-         </article>
-         <article class="element">
-            <img class="element__mask" src="./images/Egypt.jpg" alt="На изображении подводный мир Красного моря">
-            <div class="element__group">
-               <h2 class="element__title">Египет</h2>
-               <button class="element__like-button" type="button"></button>
-            </div>
-         </article>
-         <article class="element">
-            <img class="element__mask" src="./images/Mexico.jpg" alt="На изображении скалы в воде">
-            <div class="element__group">
-               <h2 class="element__title">Мексика</h2>
-               <button class="element__like-button" type="button"></button>
-            </div>
-         </article>
-      </section>
+      <section class="elements" id="article-parent"></section>
       <!-- конец ELEMENTS -->
       <!-- начало POPUP -->
-      <div class="popup">
+      <div class="popup popup_view-profile" id="popup-about">
          <div class="popup__container">
-            <button class="popup__close" type="button"></button>
+            <button class="popup__close" id="close-about" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="editForm">
-               <input type="text" class="popup__input popup__input_type_name" name="nameInput"
-                  placeholder="Жак-Ив Кусто">
-               <input type="text" class="popup__input popup__input_type_job" name="jobInput"
-                  placeholder="Исследователь океана">
+            <form class="popup__form" name="editForm" id="editForm">
+               <label class="popup__label">
+                  <input id="nameInput" class="popup__input popup__input_type_name" name="nameInput" type="text"
+                     placeholder="Имя">
+               </label>
+               <label class="popup__label">
+                  <input id="jobInput" class="popup__input popup__input_type_job" name="jobInput" type="text"
+                     placeholder="О себе">
+               </label>
                <button class="popup__save" type="submit">Сохранить</button>
             </form>
          </div>
+      </div>
+      <div class="popup popup_view-card" id="add-card-popup">
+         <div class="popup__container">
+            <button class="popup__close" type="button" id="close-add-card-popup"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="addForm" id="addForm">
+               <label class="popup__label">
+                  <input id="nameInputNew" class="popup__input popup__input_type_image-name" name="nameInputNew"
+                     type="text" placeholder="Название">
+               </label>
+               <label class="popup__label">
+                  <input id="linkInputNew" class="popup__input popup__input_type_image-link" name="linkInputNew"
+                     type="url" placeholder="Ссылка на картинку">
+               </label>
+               <button class="popup__save" type="submit">Создать</button>
+            </form>
+         </div>
+      </div>
+      <div class="popup popup_view-gallery" id="popup-gallery">
+         <figure class="popup__gallery-container">
+            <img class="popup__gallery" src="" alt="Изображения городов России" id="popup-gallery-link">
+            <figcaption class="popup__gallery-title" id="popup-gallery-name"></figcaption>
+            <button class="popup__close" type="button" id="popup-gallery-close"></button>
+         </figure>
       </div>
       <!-- конец POPUP -->
    </main>
    <!-- конец CONTENT -->
    <!-- начало FOOTER -->
    <footer class="footer">
-      <p class="footer__copyright">&copy; 2022. Горгуленко Анна</p>
+      <p class="footer__copyright">&copy; 2023. Горгуленко Анна</p>
    </footer>
    <!-- конец FOOTER -->
    <script src="./scripts/index.js"></script>
