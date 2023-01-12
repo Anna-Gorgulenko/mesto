@@ -6,7 +6,7 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
-        name: 'Челябинск',
+        name: 'Челябинская область',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
     },
     {
@@ -18,7 +18,7 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
-        name: 'Архангельск',
+        name: 'Холмогорский район',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
     },
     {
@@ -26,49 +26,6 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
-
-// ОТРИСОВКА КАРТОЧЕК --------------
-
-const cardsParent = document.getElementById('article-parent');
-
-// функция для отрисовки одной карточки
-function renderCard(name, link) {
-    const innerHtml = `
-    <article class="element" onclick="openPopupGallery(this)">
-        <button class="element__basket" onclick="deleteCard(event, this)"></button>
-        <img class="element__mask"
-        src="${link}"
-        alt="${name}">
-        <div class="element__group">
-        <h2 class="element__title">${name}</h2>
-        <button class="element__like-button" type="button" onclick="acticeDisactiveLike(event, this)"></button>
-        </div>
-    </article>
-    `;
-    cardsParent.insertAdjacentHTML('beforeend', innerHtml);
-}
-
-// отрисовка карточек в цикле из массива initialCards
-initialCards.forEach((element) => {
-    renderCard(element.name, element.link);
-})
-
-
-
-// УДАЛЕНИЕ КАРТОЧЕК -----------
-function deleteCard(event, element) {
-    event.stopPropagation();
-    element.parentNode.remove();
-};
-
-
-
-// ЛАЙКИ КАРТОЧЕК ------------
-function acticeDisactiveLike(event, element) {
-    event.stopPropagation();
-    element.classList.toggle('element__like-button_active');
-};
 
 
 
@@ -87,17 +44,55 @@ function openPopupGallery(element) {
     const articleImage = article.querySelector('.element__mask');
     const articleImageLink = articleImage.src;
     //открыть попап
-    popupGallery.style.visibility = 'initial';
-    popupGallery.style.opacity = '1';
+    openPopup(popupGallery);
     //вставляем полученные данные в попап
     popupGalleryImage.src = articleImageLink;
     popupGalleryTitle.textContent = articleTitleText;
 }
 
-popupGalleryClose.addEventListener('click', () => {
-    popupGallery.style.visibility = 'hidden';
-    popupGallery.style.opacity = '0';
+popupGalleryClose.addEventListener('click', () => { closePopup(popupGallery) });
+
+
+
+// ОТРИСОВКА КАРТОЧЕК --------------
+
+const cardsParent = document.getElementById('article-parent');
+
+// отрисовка карточек в цикле из массива initialCards
+const reversedInitialCards = initialCards.reverse();
+reversedInitialCards.forEach((element) => {
+    renderCard(element.name, element.link);
 })
+
+function renderCard(name, link) {
+    const template = document.getElementById('tmp');
+    const div = document.createElement('div');
+    div.appendChild(template.content.cloneNode(true));
+    //карточка
+    const article = div.querySelector('.element');
+    article.addEventListener('click', () => { openPopupGallery(article) });
+    //задаём src для картинки
+    const image = article.querySelector('.element__mask');
+    image.src = link;
+    image.alt = link;
+    //вставляем текст в заголовок
+    const title = article.querySelector('.element__title');
+    title.textContent = name;
+    //кнопка удаления карточки
+    const basketBtn = article.querySelector('.element__basket');
+    basketBtn.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        basketBtn.parentNode.remove();
+    })
+    //кнопка лайка карточки
+    const likeBtn = article.querySelector('.element__like-button');
+    likeBtn.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        likeBtn.classList.toggle('element__like-button_active');
+    });
+    //вставка карточки в разметку
+    cardsParent.prepend(article);
+}
 
 
 
@@ -107,15 +102,9 @@ const openCardPopupButton = document.getElementById('add-card');
 const closeCardPopupButton = document.getElementById('close-add-card-popup');
 const cardPopup = document.getElementById('add-card-popup');
 
-openCardPopupButton.addEventListener('click', () => {
-    cardPopup.style.visibility = 'initial';
-    cardPopup.style.opacity = '1';
-})
+openCardPopupButton.addEventListener('click', () => { openPopup(cardPopup) });
 
-closeCardPopupButton.addEventListener('click', () => {
-    cardPopup.style.visibility = 'hidden';
-    cardPopup.style.opacity = '0';
-})
+closeCardPopupButton.addEventListener('click', () => { closePopup(cardPopup) });
 
 const formAdd = document.getElementById('addForm');
 const formAddNameInput = document.getElementById('nameInputNew');
@@ -129,9 +118,10 @@ formAdd.addEventListener('submit', (evt) => {
     const linkValue = formAddLinkInput.value;
     //отрисовка карточки
     renderCard(nameValue, linkValue);
+    //обнуление формы
+    formAdd.reset();
     //закрыли форму
-    cardPopup.style.visibility = 'hidden';
-    cardPopup.style.opacity = '0';
+    closePopup(cardPopup);
 });
 
 
@@ -143,15 +133,9 @@ const aboutMeButton = document.getElementById('myBtn');
 const aboutPopup = document.getElementById('popup-about');
 const closeAboutPopupButton = document.getElementById('close-about');
 
-aboutMeButton.addEventListener('click', () => {
-    aboutPopup.style.visibility = 'initial';
-    aboutPopup.style.opacity = '1';
-})
+aboutMeButton.addEventListener('click', () => { openPopup(aboutPopup) });
 
-closeAboutPopupButton.addEventListener('click', () => {
-    aboutPopup.style.visibility = 'hidden';
-    aboutPopup.style.opacity = '0';
-})
+closeAboutPopupButton.addEventListener('click', () => { closePopup(aboutPopup) });
 
 // обновление информации об профайле
 const nameAbout = document.getElementById('name-about');
@@ -171,6 +155,17 @@ formAbout.addEventListener('submit', (evt) => {
     nameAbout.textContent = formAboutNameInput.value;
     profileAbout.textContent = formAboutJobInput.value;
     //закрыли форму
-    aboutPopup.style.visibility = 'hidden';
-    aboutPopup.style.opacity = '0';
+    closePopup(aboutPopup);
 });
+
+
+
+// ФУНКЦИИ ОТКРЫТИЯ/ЗАКРЫТИЯ ПОПАПОВ
+
+function openPopup(element) {
+    element.classList.add('popup_opened')
+}
+
+function closePopup(element) {
+    element.classList.remove('popup_opened')
+}
