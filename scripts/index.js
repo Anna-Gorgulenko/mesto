@@ -31,7 +31,7 @@ const initialCards = [
 
 // ОТКРЫТИЕ МОДАЛЬНОЙ ГАЛЕРЕИ ---------------
 const popupGallery = document.getElementById('popup-gallery');
-const popupGalleryClose = document.getElementById('popup-gallery-close');
+// const popupGalleryClose = document.getElementById('popup-gallery-close');
 const popupGalleryImage = document.getElementById('popup-gallery-link');
 const popupGalleryTitle = document.getElementById('popup-gallery-name');
 
@@ -50,48 +50,52 @@ function openPopupGallery(element) {
     popupGalleryTitle.textContent = articleTitleText;
 }
 
-popupGalleryClose.addEventListener('click', () => { closePopup(popupGallery) });
+// находим все крестики проекта по универсальному селектору
+const closeButtons = document.querySelectorAll('.popup__close');
+
+closeButtons.forEach((button) => {
+    // находим 1 раз ближайший к крестику попап 
+    const popup = button.closest('.popup');
+    // устанавливаем обработчик закрытия на крестик
+    button.addEventListener('click', () => closePopup(popup));
+});
 
 
 
 // ОТРИСОВКА КАРТОЧЕК --------------
 
-const cardsParent = document.getElementById('article-parent');
+const cardsParent = document.getElementById('elements-article');
 
 // отрисовка карточек в цикле из массива initialCards
 const reversedInitialCards = initialCards.reverse();
 reversedInitialCards.forEach((element) => {
-    renderCard(element.name, element.link);
+    cardsParent.prepend(createCard(element.name, element.link));
 })
 
-function renderCard(name, link) {
+function createCard(name, link) {
     const template = document.getElementById('tmp');
-    const div = document.createElement('div');
-    div.appendChild(template.content.cloneNode(true));
+    const article = template.content.cloneNode(true).querySelector('.element');
     //карточка
-    const article = div.querySelector('.element');
-    article.addEventListener('click', () => { openPopupGallery(article) });
-    //задаём src для картинки
     const image = article.querySelector('.element__mask');
     image.src = link;
-    image.alt = link;
+    image.alt = name;
+    image.addEventListener('click', () => { openPopupGallery(article) });
     //вставляем текст в заголовок
     const title = article.querySelector('.element__title');
     title.textContent = name;
     //кнопка удаления карточки
     const basketBtn = article.querySelector('.element__basket');
     basketBtn.addEventListener('click', (evt) => {
-        evt.stopPropagation();
-        basketBtn.parentNode.remove();
+        // basketBtn.parentNode.remove();
+        article.remove();
     })
     //кнопка лайка карточки
     const likeBtn = article.querySelector('.element__like-button');
     likeBtn.addEventListener('click', (evt) => {
-        evt.stopPropagation();
         likeBtn.classList.toggle('element__like-button_active');
     });
-    //вставка карточки в разметку
-    cardsParent.prepend(article);
+    //возвращаем карточку
+    return article;
 }
 
 
@@ -99,12 +103,9 @@ function renderCard(name, link) {
 // ДОБАВЛЕНИЕ КАРТОЧЕК ЧЕРЕЗ ФОРМУ ---------------
 
 const openCardPopupButton = document.getElementById('add-card');
-const closeCardPopupButton = document.getElementById('close-add-card-popup');
 const cardPopup = document.getElementById('add-card-popup');
 
 openCardPopupButton.addEventListener('click', () => { openPopup(cardPopup) });
-
-closeCardPopupButton.addEventListener('click', () => { closePopup(cardPopup) });
 
 const formAdd = document.getElementById('addForm');
 const formAddNameInput = document.getElementById('nameInputNew');
@@ -117,7 +118,7 @@ formAdd.addEventListener('submit', (evt) => {
     const nameValue = formAddNameInput.value;
     const linkValue = formAddLinkInput.value;
     //отрисовка карточки
-    renderCard(nameValue, linkValue);
+    cardsParent.prepend(createCard(nameValue, linkValue));
     //обнуление формы
     formAdd.reset();
     //закрыли форму
@@ -131,11 +132,8 @@ formAdd.addEventListener('submit', (evt) => {
 // открытие попапа редактирования инфо об профайле
 const aboutMeButton = document.getElementById('myBtn');
 const aboutPopup = document.getElementById('popup-about');
-const closeAboutPopupButton = document.getElementById('close-about');
 
 aboutMeButton.addEventListener('click', () => { openPopup(aboutPopup) });
-
-closeAboutPopupButton.addEventListener('click', () => { closePopup(aboutPopup) });
 
 // обновление информации об профайле
 const nameAbout = document.getElementById('name-about');
