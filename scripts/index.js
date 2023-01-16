@@ -61,6 +61,17 @@ closeButtons.forEach((button) => {
 });
 
 
+// ЗАКРЫТИЕ ПОПАПА КЛИКОМ НА ОВЕРЛЕЙ
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            closePopup(popup);
+        }
+    })
+})
+
 
 // ОТРИСОВКА КАРТОЧЕК --------------
 
@@ -113,7 +124,7 @@ const formAddLinkInput = document.getElementById('linkInputNew');
 
 formAdd.addEventListener('submit', (evt) => {
     //отменили действие по умолчанию
-    evt.preventDefault();
+    //evt.preventDefault();
     //получение значений формы
     const nameValue = formAddNameInput.value;
     const linkValue = formAddLinkInput.value;
@@ -160,10 +171,20 @@ formAbout.addEventListener('submit', (evt) => {
 
 // ФУНКЦИИ ОТКРЫТИЯ/ЗАКРЫТИЯ ПОПАПОВ
 
+function escapePopupClose(element) {
+    return (event) => {
+        if (event.key === "Escape") {
+            closePopup(element)
+        }
+    }
+}
+
 function openPopup(element) {
     element.classList.add('popup_opened')
+    document.addEventListener('keydown', escapePopupClose(element))
 }
 
 function closePopup(element) {
     element.classList.remove('popup_opened')
+    document.removeEventListener('keydown', escapePopupClose)
 }
