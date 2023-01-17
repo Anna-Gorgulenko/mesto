@@ -47,27 +47,22 @@ function openPopupGallery(element) {
     openPopup(popupGallery);
     //вставляем полученные данные в попап
     popupGalleryImage.src = articleImageLink;
+    popupGalleryImage.alt = articleTitleText;
     popupGalleryTitle.textContent = articleTitleText;
 }
 
-// находим все крестики проекта по универсальному селектору
-const closeButtons = document.querySelectorAll('.popup__close');
-
-closeButtons.forEach((button) => {
-    // находим 1 раз ближайший к крестику попап 
-    const popup = button.closest('.popup');
-    // устанавливаем обработчик закрытия на крестик
-    button.addEventListener('click', () => closePopup(popup));
-});
 
 
 // ЗАКРЫТИЕ ПОПАПА КЛИКОМ НА ОВЕРЛЕЙ
 const popups = document.querySelectorAll('.popup');
 
 popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
+    popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup')) {
             closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__close')) {
+            closePopup(popup)
         }
     })
 })
@@ -124,7 +119,7 @@ const formAddLinkInput = document.getElementById('linkInputNew');
 
 formAdd.addEventListener('submit', (evt) => {
     //отменили действие по умолчанию
-    //evt.preventDefault();
+    evt.preventDefault();
     //получение значений формы
     const nameValue = formAddNameInput.value;
     const linkValue = formAddLinkInput.value;
@@ -171,20 +166,19 @@ formAbout.addEventListener('submit', (evt) => {
 
 // ФУНКЦИИ ОТКРЫТИЯ/ЗАКРЫТИЯ ПОПАПОВ
 
-function escapePopupClose(element) {
-    return (event) => {
-        if (event.key === "Escape") {
-            closePopup(element)
-        }
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
     }
 }
 
 function openPopup(element) {
     element.classList.add('popup_opened')
-    document.addEventListener('keydown', escapePopupClose(element))
+    document.addEventListener('keydown', closeByEscape)
 }
 
 function closePopup(element) {
     element.classList.remove('popup_opened')
-    document.removeEventListener('keydown', escapePopupClose)
+    document.removeEventListener('keydown', closeByEscape)
 }
