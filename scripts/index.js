@@ -1,3 +1,6 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
 // СПИСОК КАРТОЧЕК --------------
 
 const initialCards = [
@@ -75,35 +78,9 @@ const cardsParent = document.getElementById('elements-article');
 // отрисовка карточек в цикле из массива initialCards
 const reversedInitialCards = initialCards.reverse();
 reversedInitialCards.forEach((element) => {
-    cardsParent.prepend(createCard(element.name, element.link));
+    const newCard = new Card('#tmp', element.name, element.link, openPopupGallery);
+    cardsParent.prepend(newCard.generateCard());
 })
-
-function createCard(name, link) {
-    const template = document.getElementById('tmp');
-    const article = template.content.cloneNode(true).querySelector('.element');
-    //карточка
-    const image = article.querySelector('.element__mask');
-    image.src = link;
-    image.alt = name;
-    image.addEventListener('click', () => { openPopupGallery(article) });
-    //вставляем текст в заголовок
-    const title = article.querySelector('.element__title');
-    title.textContent = name;
-    //кнопка удаления карточки
-    const basketBtn = article.querySelector('.element__basket');
-    basketBtn.addEventListener('click', (evt) => {
-        // basketBtn.parentNode.remove();
-        article.remove();
-    })
-    //кнопка лайка карточки
-    const likeBtn = article.querySelector('.element__like-button');
-    likeBtn.addEventListener('click', (evt) => {
-        likeBtn.classList.toggle('element__like-button_active');
-    });
-    //возвращаем карточку
-    return article;
-}
-
 
 
 // ДОБАВЛЕНИЕ КАРТОЧЕК ЧЕРЕЗ ФОРМУ ---------------
@@ -124,7 +101,8 @@ formAdd.addEventListener('submit', (evt) => {
     const nameValue = formAddNameInput.value;
     const linkValue = formAddLinkInput.value;
     //отрисовка карточки
-    cardsParent.prepend(createCard(nameValue, linkValue));
+    const newCard = new Card('#tmp', nameValue, linkValue, openPopupGallery);
+    cardsParent.prepend(newCard.generateCard());
     //обнуление формы
     formAdd.reset();
     //закрыли форму
@@ -182,3 +160,20 @@ function closePopup(element) {
     element.classList.remove('popup_opened')
     document.removeEventListener('keydown', closeByEscape)
 }
+
+
+// ИНИЦИАЛИЗАЦИЯ ФОРМ
+
+const formClassSelectors = {
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save',
+    inactiveButtonClass: 'popup__save_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'error_visible'
+};
+
+const formAddEx = new FormValidator(formClassSelectors, formAdd);
+formAddEx.enableValidation();
+
+const formAboutEx = new FormValidator(formClassSelectors, formAbout);
+formAboutEx.enableValidation();
