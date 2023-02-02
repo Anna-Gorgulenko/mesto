@@ -38,22 +38,15 @@ const popupGallery = document.getElementById('popup-gallery');
 const popupGalleryImage = document.getElementById('popup-gallery-link');
 const popupGalleryTitle = document.getElementById('popup-gallery-name');
 
-function openPopupGallery(element) {
-    //элемент article
-    const article = element;
-    //получаем элементы внутри article
-    const articleTitle = article.querySelector('.element__title');
-    const articleTitleText = articleTitle.textContent;
-    const articleImage = article.querySelector('.element__mask');
-    const articleImageLink = articleImage.src;
+
+function openPopupGallery(name, link) {
     //открыть попап
     openPopup(popupGallery);
     //вставляем полученные данные в попап
-    popupGalleryImage.src = articleImageLink;
-    popupGalleryImage.alt = articleTitleText;
-    popupGalleryTitle.textContent = articleTitleText;
+    popupGalleryImage.src = link;
+    popupGalleryImage.alt = name;
+    popupGalleryTitle.textContent = name;
 }
-
 
 
 // ЗАКРЫТИЕ ПОПАПА КЛИКОМ НА ОВЕРЛЕЙ
@@ -75,11 +68,15 @@ popups.forEach((popup) => {
 
 const cardsParent = document.getElementById('elements-article');
 
+const createCard = (tmp, name, link, func) => {
+    return new Card(tmp, name, link, func).generateCard();
+}
+
 // отрисовка карточек в цикле из массива initialCards
 const reversedInitialCards = initialCards.reverse();
 reversedInitialCards.forEach((element) => {
-    const newCard = new Card('#tmp', element.name, element.link, openPopupGallery);
-    cardsParent.prepend(newCard.generateCard());
+    const newCard = createCard('#tmp', element.name, element.link, openPopupGallery);
+    cardsParent.prepend(newCard);
 })
 
 
@@ -117,7 +114,11 @@ formAdd.addEventListener('submit', (evt) => {
 const aboutMeButton = document.getElementById('myBtn');
 const aboutPopup = document.getElementById('popup-about');
 
-aboutMeButton.addEventListener('click', () => { openPopup(aboutPopup) });
+aboutMeButton.addEventListener('click', () => { 
+    openPopup(aboutPopup);
+    formAboutNameInput.value = nameAbout.textContent;
+    formAboutJobInput.value = profileAbout.textContent;
+});
 
 // обновление информации об профайле
 const nameAbout = document.getElementById('name-about');
@@ -126,9 +127,6 @@ const profileAbout = document.getElementById('profile-about');
 const formAbout = document.getElementById('editForm');
 const formAboutNameInput = document.getElementById('nameInput');
 const formAboutJobInput = document.getElementById('jobInput');
-
-formAboutNameInput.value = nameAbout.textContent;
-formAboutJobInput.value = profileAbout.textContent;
 
 formAbout.addEventListener('submit', (evt) => {
     //отменили действие по умолчанию

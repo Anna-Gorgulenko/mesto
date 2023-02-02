@@ -11,11 +11,20 @@ export default class FormValidator {
       this._submitButton = this._form.querySelector(this._data.submitButtonSelector);
    }
 
+   _disableSubmitButton() {
+      this._submitButton.classList.add(this._data.inactiveButtonClass);
+      this._submitButton.disabled = true;
+   }
+
+   _enableSubmitButton() {
+      this._submitButton.classList.remove(this._data.inactiveButtonClass);
+      this._submitButton.disabled = false;
+   }
+
    _setEventListeners = () => {
       //отключение кнопок при reset формы
       this._form.addEventListener('reset', () => {
-         this._submitButton.classList.add(this._data.inactiveButtonClass);
-         this._submitButton.disabled = true;
+         this._disableSubmitButton();
       });
       this._inputList.forEach((inputElement) => {
          inputElement.addEventListener('input', () => {
@@ -54,12 +63,10 @@ export default class FormValidator {
     };
     
    _toggleButtonState = () => {
-      if (this._hasInvalidInput(this.inputList)) {
-        this._submitButton.classList.add(this._data.inactiveButtonClass);
-        this._submitButton.disabled = true;
+      if (this._hasInvalidInput()) {
+        this._disableSubmitButton();
       } else {
-        this._submitButton.classList.remove(this._data.inactiveButtonClass);
-        this._submitButton.disabled = false;
+         this._enableSubmitButton();
       }
     }; 
 
