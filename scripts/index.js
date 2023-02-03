@@ -98,8 +98,8 @@ formAdd.addEventListener('submit', (evt) => {
     const nameValue = formAddNameInput.value;
     const linkValue = formAddLinkInput.value;
     //отрисовка карточки
-    const newCard = new Card('#tmp', nameValue, linkValue, openPopupGallery);
-    cardsParent.prepend(newCard.generateCard());
+    const newCard = createCard('#tmp', nameValue, linkValue, openPopupGallery);
+    cardsParent.prepend(newCard);
     //обнуление формы
     formAdd.reset();
     //закрыли форму
