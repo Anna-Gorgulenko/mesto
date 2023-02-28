@@ -7,7 +7,7 @@
    <meta name="description" content="Проект Mesto: базовая функциональность">
    <meta name="author" content="Anna Gorgulenko">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="./pages/index.css">
+   <!-- <link rel="stylesheet" href="./pages/index.css"> -->
    <link rel="shortcut icon"
       href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAVFBMVEUAAAD///8GBgb19fWEhIQFBQW+vr7V1dVkZGT5+fkpKSl+fn78/PyIiIjQ0NDs7Ozb29uQkJBfX1+3t7cTExMrKysdHR1xcXHr6+syMjJDQ0OXl5d6TcMKAAABqElEQVR4nO3c3W7aQBCA0TXGKa4NJOSvSd7/PYvTUFKpF53gdtbNOfeM+LTGeJHYUgAAAAAAAAAAAAAAAAD4H3Srj+iy3zafyKo8Xu++RO2uH4+vXIZVuWk+4mZBhcO4b6O+jcOCCtdNH17BvlkvqrANF7YKK6Lw9xb3ORyjlrWGQ9P2UftmSd8WL+FrdPKymMKuPG0Om6jD5qnYXdTD/hAg6v2dc4Zx7q7/XFeet8P61bA9XPpY0nVlcx73XMVTzi9Pobty4ZXVrcqutifVaSfx9rvTfrydFuESx5ffnn7GqmW38W6/2zZXM6zh1XlcHTtGhTEKMyiMUZhBYYzCDApjFGZQGKMwg8IYhRkUxijMoDBGYQaFMQozKIxRmEFhjMIMCmMUZlAYozCDwhiFGRTGKMygMEZhBoUxCjMojFGYQWGMwgwKYxRm+ByF/V8prOU8l6lwfzqeZJb/H57H1fL/w23T/zhipj+u4aWF0xr+HLetpXA8nUjWz3KV9qdxYx2Fpdzdf31z/zDDuIfzuLsZxvEnnDgAAAAAAAAAAAAAAAAAAADEfAd32yLHf2pLeAAAAABJRU5ErkJggg==">
    <title>Место</title>
@@ -17,7 +17,7 @@
    <!-- НАЧАЛО -->
    <!-- начало HEADER -->
    <header class="header">
-      <img class="header__logo" src="./images/header_logo.svg" alt="Логотип Mesto Russia">
+      <img class="header__logo" src="<%=require('./images/header_logo.svg')%>" alt="Логотип Mesto Russia">
    </header>
    <!-- конец HEADER -->
    <!-- начало CONTENT -->
@@ -25,7 +25,8 @@
       <!-- начало PROFILE -->
       <section class="profile">
          <div class="profile__container">
-            <img class="profile__avatar" src="./images/profile-avatar.jpg" alt="Изображенно фото Жак-Ив Кусто">
+            <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>"
+               alt="Изображенно фото Жак-Ив Кусто">
             <div class="profile__info">
                <h1 class="profile__title" id="name-about">Жак-Ив Кусто</h1>
                <button class="profile__edit-button" id="myBtn" type="button"></button>
@@ -102,7 +103,6 @@
       <p class="footer__copyright">&copy; 2023. Горгуленко Анна</p>
    </footer>
    <!-- конец FOOTER -->
-   <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
