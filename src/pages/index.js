@@ -1,41 +1,11 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import { initialCards, formClassSelectors } from "../utils/constants.js";
 import './index.css'
-
-// СПИСОК КАРТОЧЕК --------------
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
 
 
 // ОТКРЫТИЕ МОДАЛЬНОЙ ГАЛЕРЕИ ---------------
@@ -81,24 +51,17 @@ const formAdd = document.getElementById('addForm');
 const formAddNameInput = document.getElementById('nameInputNew');
 const formAddLinkInput = document.getElementById('linkInputNew');
 
-const addSubmitListenerToFormAdd = () => {
-    formAdd.addEventListener('submit', (evt) => {
-        //отменили действие по умолчанию
-        evt.preventDefault();
-        //получение значений формы
-        const nameValue = formAddNameInput.value;
-        const linkValue = formAddLinkInput.value;
-        //отрисовка карточки
-        const newCard = createCard('#tmp', nameValue, linkValue, popupGallery.openPopup);
-        defaultCardList.addItem(newCard);
-        //обнуление формы
-        formAdd.reset();
-        //закрыли форму
-        cardPopup.closePopup();
-    });
-}
+const submitHandlerToFormAdd = (evt, data) => {
+    //отменили действие по умолчанию
+    evt.preventDefault();
+    //отрисовка карточки
+    const newCard = createCard('#tmp', data[ formAddNameInput.getAttribute('name') ], data[ formAddLinkInput.getAttribute('name') ], popupGallery.openPopup);
+    defaultCardList.addItem(newCard);
+    //закрыли форму
+    cardPopup.closePopup();
+};
 
-const cardPopup = new PopupWithForm('#add-card-popup', addSubmitListenerToFormAdd);
+const cardPopup = new PopupWithForm('#add-card-popup', submitHandlerToFormAdd);
 cardPopup.setEventListeners();
 
 openCardPopupButton.addEventListener('click', () => { cardPopup.openPopup() });
@@ -113,18 +76,17 @@ const formAbout = document.getElementById('editForm');
 const formAboutNameInput = document.getElementById('nameInput');
 const formAboutJobInput = document.getElementById('jobInput');
 
-const addSubmitListenerToFormAbout = () => {
-    formAbout.addEventListener('submit', (evt) => {
-        //отменили действие по умолчанию
-        evt.preventDefault();
-        //обновили текст на странице
-        userInfo.setUserInfo({ name: formAboutNameInput.value, job: formAboutJobInput.value });
-        //закрыли форму
-        aboutPopup.closePopup();
-    });
-}
+const submitHandlerToFormAbout = (evt, data) => {
+    //отменили действие по умолчанию
+    evt.preventDefault();
+    //обновили текст на странице
+    userInfo.setUserInfo({ name: data[ formAboutNameInput.getAttribute('name') ], job: data[ formAboutJobInput.getAttribute('name') ] });
+    //закрыли форму
+    aboutPopup.closePopup();
+};
 
-const aboutPopup = new PopupWithForm('#popup-about', addSubmitListenerToFormAbout);
+
+const aboutPopup = new PopupWithForm('#popup-about', submitHandlerToFormAbout);
 aboutPopup.setEventListeners();
 
 // обновление информации об профайле
@@ -136,21 +98,14 @@ const userInfo = new UserInfo({
 
 aboutMeButton.addEventListener('click', () => {
     aboutPopup.openPopup();
-    formAboutNameInput.value = userInfo.getUserInfo().name;
-    formAboutJobInput.value = userInfo.getUserInfo().job;
+    const {job, name} = userInfo.getUserInfo()
+    formAboutNameInput.value = name;
+    formAboutJobInput.value = job;
 });
 
 
 
 // ИНИЦИАЛИЗАЦИЯ ФОРМ
-
-const formClassSelectors = {
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save',
-    inactiveButtonClass: 'popup__save_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'error_visible'
-};
 
 const formAddEx = new FormValidator(formClassSelectors, formAdd);
 formAddEx.enableValidation();
