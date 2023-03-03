@@ -8,18 +8,18 @@
    height: 272px;
    margin: 0 auto;
    position: relative;
-   width: 430px
+   width: 430px;
 }
 
 @media screen and (max-width: 500px) {
    .popup__avatar-container {
-       height:280px;
-       width: 300px
+       height: 280px;
+       width: 300px;
    }
 }
 
 @media screen and (max-width: 320px) {
    .popup__avatar-container {
-       width:282px
+       width: 282px;
    }
 }
