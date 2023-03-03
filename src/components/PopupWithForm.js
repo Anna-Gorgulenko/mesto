@@ -5,6 +5,8 @@ export default class PopupWithForm extends Popup {
       super(selector);
       this._submitCallback = submitCallback;
       this._form = this._popup.querySelector('.popup__form');
+      this._saveBtn = this._popup.querySelector('.popup__save');
+      this._initialSaveBtnText = this._saveBtn.textContent;
    }
 
    _getInputValues = () => {
@@ -26,6 +28,14 @@ export default class PopupWithForm extends Popup {
    closePopup() {
       super.closePopup();
       this._form.reset();
+   }
+
+   startSaving() {
+      this._saveBtn.textContent = 'Сохранение...';
+   }
+
+   endSaving() {
+      this._saveBtn.textContent = this._initialSaveBtnText;
    }
 
    setEventListeners() {
