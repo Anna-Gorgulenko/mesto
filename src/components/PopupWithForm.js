@@ -1,48 +1,40 @@
 import Popup from "./Popup.js"
 
 export default class PopupWithForm extends Popup {
-   constructor(selector, submitCallback) {
-      super(selector);
-      this._submitCallback = submitCallback;
-      this._form = this._popup.querySelector('.popup__form');
-      this._saveBtn = this._popup.querySelector('.popup__save');
-      this._initialSaveBtnText = this._saveBtn.textContent;
-   }
+  constructor(selector, callbackSubmit) {
+    super(selector)
+    this._callbackSubmit = callbackSubmit
+    this._form = this._popup.querySelector(".popup__form")
+    this._inputs = [...this._form.querySelectorAll(".popup__input")]
+    this._form.addEventListener("submit", (event) => {
+      event.preventDefault()
+      const replacementText = event.submitter.textContent
+      // Смена текста кнопки при сохранение данных
+      event.submitter.textContent = "Сохранение..."
+      this._callbackSubmit(this._getInputValues())
+        .then(() => this.close())
+        .finally(() => {
+          event.submitter.textContent = replacementText
+        })
+    })
+  }
 
-   _getInputValues = () => {
-      // достаём все элементы полей
-      this._inputList = this._form.querySelectorAll('.popup__input');
+  _getInputValues() {
+    const values = {}
+    this._inputs.forEach((input) => {
+      values[input.name] = input.value
+    })
+    return values
+  }
 
-      // создаём пустой объект
-      this._formValues = {};
+  setInputValue(data) {
+    this._inputs.forEach((input) => {
+      input.value = data[input.name]
+    })
+  }
 
-      // добавляем в этот объект значения всех полей
-      this._inputList.forEach(input => {
-         this._formValues[input.name] = input.value;
-      });
-
-      // возвращаем объект значений
-      return this._formValues;
-   }
-
-   closePopup() {
-      super.closePopup();
-      this._form.reset();
-   }
-
-   startSaving() {
-      this._saveBtn.textContent = 'Сохранение...';
-   }
-
-   endSaving() {
-      this._saveBtn.textContent = this._initialSaveBtnText;
-   }
-
-   setEventListeners() {
-      super.setEventListeners();
-
-      this._form.addEventListener('submit', (evt) => {
-         this._submitCallback(evt, this._getInputValues());
-      })
-   }
-} 
+  close() {
+    super.close()
+    this._form.reset()
+  }
+}

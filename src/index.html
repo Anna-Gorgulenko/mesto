@@ -1,134 +1,233 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Проект Mesto: базовая функциональность" />
+    <meta name="author" content="Anna Gorgulenko" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
+    <link
+      rel="shortcut icon"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAVFBMVEUAAAD///8GBgb19fWEhIQFBQW+vr7V1dVkZGT5+fkpKSl+fn78/PyIiIjQ0NDs7Ozb29uQkJBfX1+3t7cTExMrKysdHR1xcXHr6+syMjJDQ0OXl5d6TcMKAAABqElEQVR4nO3c3W7aQBCA0TXGKa4NJOSvSd7/PYvTUFKpF53gdtbNOfeM+LTGeJHYUgAAAAAAAAAAAAAAAAD4H3Srj+iy3zafyKo8Xu++RO2uH4+vXIZVuWk+4mZBhcO4b6O+jcOCCtdNH17BvlkvqrANF7YKK6Lw9xb3ORyjlrWGQ9P2UftmSd8WL+FrdPKymMKuPG0Om6jD5qnYXdTD/hAg6v2dc4Zx7q7/XFeet8P61bA9XPpY0nVlcx73XMVTzi9Pobty4ZXVrcqutifVaSfx9rvTfrydFuESx5ffnn7GqmW38W6/2zZXM6zh1XlcHTtGhTEKMyiMUZhBYYzCDApjFGZQGKMwg8IYhRkUxijMoDBGYQaFMQozKIxRmEFhjMIMCmMUZlAYozCDwhiFGRTGKMygMEZhBoUxCjMojFGYQWGMwgwKYxRm+ByF/V8prOU8l6lwfzqeZJb/H57H1fL/w23T/zhipj+u4aWF0xr+HLetpXA8nUjWz3KV9qdxYx2Fpdzdf31z/zDDuIfzuLsZxvEnnDgAAAAAAAAAAAAAAAAAAADEfAd32yLHf2pLeAAAAABJRU5ErkJggg=="
+    />
+    <title>Место</title>
+  </head>
 
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="description" content="Проект Mesto: базовая функциональность">
-   <meta name="author" content="Anna Gorgulenko">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!-- <link rel="stylesheet" href="./pages/index.css"> -->
-   <link rel="shortcut icon"
-      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAVFBMVEUAAAD///8GBgb19fWEhIQFBQW+vr7V1dVkZGT5+fkpKSl+fn78/PyIiIjQ0NDs7Ozb29uQkJBfX1+3t7cTExMrKysdHR1xcXHr6+syMjJDQ0OXl5d6TcMKAAABqElEQVR4nO3c3W7aQBCA0TXGKa4NJOSvSd7/PYvTUFKpF53gdtbNOfeM+LTGeJHYUgAAAAAAAAAAAAAAAAD4H3Srj+iy3zafyKo8Xu++RO2uH4+vXIZVuWk+4mZBhcO4b6O+jcOCCtdNH17BvlkvqrANF7YKK6Lw9xb3ORyjlrWGQ9P2UftmSd8WL+FrdPKymMKuPG0Om6jD5qnYXdTD/hAg6v2dc4Zx7q7/XFeet8P61bA9XPpY0nVlcx73XMVTzi9Pobty4ZXVrcqutifVaSfx9rvTfrydFuESx5ffnn7GqmW38W6/2zZXM6zh1XlcHTtGhTEKMyiMUZhBYYzCDApjFGZQGKMwg8IYhRkUxijMoDBGYQaFMQozKIxRmEFhjMIMCmMUZlAYozCDwhiFGRTGKMygMEZhBoUxCjMojFGYQWGMwgwKYxRm+ByF/V8prOU8l6lwfzqeZJb/H57H1fL/w23T/zhipj+u4aWF0xr+HLetpXA8nUjWz3KV9qdxYx2Fpdzdf31z/zDDuIfzuLsZxvEnnDgAAAAAAAAAAAAAAAAAAADEfAd32yLHf2pLeAAAAABJRU5ErkJggg==">
-   <title>Место</title>
-</head>
-
-<body class="root">
-   <!-- НАЧАЛО -->
-   <!-- начало HEADER -->
-   <header class="header">
-      <img class="header__logo" src="<%=require('./images/header_logo.svg')%>" alt="Логотип Mesto Russia">
-   </header>
-   <!-- конец HEADER -->
-   <!-- начало CONTENT -->
-   <main class="content">
+  <body class="root">
+    <!-- НАЧАЛО -->
+    <!-- начало HEADER -->
+    <header class="header">
+      <img
+        class="header__logo"
+        src="<%=require('./images/header_logo.svg')%>"
+        alt="Логотип Mesto Russia"
+      />
+    </header>
+    <!-- конец HEADER -->
+    <!-- начало CONTENT -->
+    <main class="content">
       <!-- начало PROFILE -->
       <section class="profile">
-         <div class="profile__container">
-            <div class="profile__wrapper-relative">
-            <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>"
-               alt="Анна-разработчик">
-               <button class="profile__edit-avatar" type="button"></button>
-            </div>
-            <div class="profile__info">
-               <h1 class="profile__title" id="name-about">Анна-разработчик</h1>
-               <button class="profile__edit-button" id="myBtn" type="button"></button>
-               <p class="profile__subtitle" id="profile-about">Начинающий разработчик</p>
-            </div>
-         </div>
-         <button class="profile__add-button" type="button" id="add-card"></button>
+        <div class="profile__container">
+          <div class="profile__wrapper-relative">
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/profile-avatar.jpg')%>"
+              alt="Анна-разработчик"
+            />
+            <button class="profile__edit-avatar" type="button"></button>
+          </div>
+          <div class="profile__info">
+            <h1 class="profile__title" id="name-about">Анна-разработчик</h1>
+            <button
+              class="profile__edit-button"
+              id="myBtn"
+              type="button"
+            ></button>
+            <p class="profile__subtitle" id="profile-about">
+              Начинающий разработчик
+            </p>
+          </div>
+        </div>
+        <button
+          class="profile__add-button"
+          type="button"
+          id="add-card"
+        ></button>
       </section>
       <!-- конец PROFILE -->
       <!-- начало ELEMENTS -->
-      <section class="elements" id="elements-article"></section>
-      <template id="tmp">
-         <article class="element">
-            <button class="element__basket"></button>
-            <img class="element__mask" src="#" alt="">
-            <div class="element__group">
-               <h2 class="element__title"></h2>
-               <div class="element__container-like">
-                  <button class="element__like-button" type="button"></button>
-                  <p class="element__count-like"></p>
-               </div>
+      <section class="elements" id="elements"></section>
+      <template class="template" id="template">
+        <article class="element">
+          <button class="element__basket"></button>
+          <img class="element__mask" src="#" alt="" />
+          <div class="element__group">
+            <h2 class="element__title"></h2>
+            <div class="element__container-like">
+              <button class="element__like-button" type="button"></button>
+              <p class="element__count-like"></p>
             </div>
-         </article>
+          </div>
+        </article>
       </template>
       <!-- конец ELEMENTS -->
       <!-- начало POPUP -->
       <div class="popup popup_view-profile" id="popup-about">
-         <div class="popup__container">
-            <button class="popup__close" id="close-about" type="button"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="editForm" id="editForm" novalidate>
-               <label class="popup__label">
-                  <input id="nameInput" class="popup__input popup__input_type_name" name="nameInput" type="text"
-                     placeholder="Имя" minlength="2" maxlength="40" required>
-                  <span class="nameInput-error popup__error"></span>
-               </label>
-               <label class="popup__label">
-                  <input id="jobInput" class="popup__input popup__input_type_job" name="jobInput" type="text"
-                     placeholder="О себе" minlength="2" maxlength="200" required>
-                  <span class="jobInput-error popup__error"></span>
-               </label>
-               <button class="popup__save popup__save_disabled" type="submit" disabled>Сохранить</button>
-            </form>
-         </div>
+        <div class="popup__container">
+          <button class="popup__close" id="close-about" type="button"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="editForm" id="editForm" novalidate>
+            <label class="popup__label">
+              <input
+                id="nameInput"
+                class="popup__input popup__input_type_name"
+                name="name"
+                type="text"
+                placeholder="Имя"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="nameInput-error error"></span>
+            </label>
+            <label class="popup__label">
+              <input
+                id="jobInput"
+                class="popup__input popup__input_type_job"
+                name="about"
+                type="text"
+                placeholder="О себе"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="jobInput-error error"></span>
+            </label>
+            <button
+              class="popup__save popup__save_disabled"
+              type="submit"
+              disabled
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
       </div>
-      <div class="popup popup_view-card" id="add-card-popup">
-         <div class="popup__container">
-            <button class="popup__close" type="button" id="close-add-card-popup"></button>
-            <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="addForm" id="addForm" novalidate>
-               <label class="popup__label">
-                  <input id="nameInputNew" class="popup__input popup__input_type_image-name" name="nameInputNew"
-                     type="text" placeholder="Название" minlength="2" maxlength="30" required>
-                  <span class="nameInputNew-error popup__error"></span>
-               </label>
-               <label class="popup__label">
-                  <input id="linkInputNew" class="popup__input popup__input_type_image-link" name="linkInputNew"
-                     type="url" placeholder="Ссылка на картинку" required>
-                  <span class="linkInputNew-error popup__error_visible popup__error">error</span>
-               </label>
-               <button class="popup__save popup__save_disabled" type="submit" disabled>Создать</button>
-            </form>
-         </div>
+      <div class="popup popup_view-card" id="popup_view-card">
+        <div class="popup__container">
+          <button
+            class="popup__close"
+            type="button"
+            id="close-add-card-popup"
+          ></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form class="popup__form" name="addForm" id="addForm" novalidate>
+            <label class="popup__label">
+              <input
+                id="nameInputNew"
+                class="popup__input popup__input_type_image-name"
+                name="name"
+                type="text"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span class="nameInputNew-error error"></span>
+            </label>
+            <label class="popup__label">
+              <input
+                id="linkInputNew"
+                class="popup__input popup__input_type_image-link"
+                name="link"
+                type="url"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="linkInputNew-error error"></span>
+            </label>
+            <button
+              class="popup__save popup__save_disabled"
+              type="submit"
+              disabled
+            >
+              Создать
+            </button>
+          </form>
+        </div>
       </div>
       <div class="popup popup_view-gallery" id="popup-gallery">
-         <figure class="popup__gallery-container">
-            <img class="popup__gallery" src="#" alt="Изображения городов России" id="popup-gallery-link">
-            <figcaption class="popup__gallery-title" id="popup-gallery-name"></figcaption>
-            <button class="popup__close" type="button" id="popup-gallery-close"></button>
-         </figure>
+        <figure class="popup__gallery-container">
+          <img
+            class="popup__gallery"
+            src="#"
+            alt="Изображения городов России"
+            id="popup-gallery-link"
+          />
+          <figcaption
+            class="popup__gallery-title"
+            id="popup-gallery-name"
+          ></figcaption>
+          <button
+            class="popup__close"
+            type="button"
+            id="popup-gallery-close"
+          ></button>
+        </figure>
       </div>
       <div class="popup popup_view-confirmation">
-         <div class="popup__confirmation-container">
-            <button class="popup__close" type="button"></button>
-            <h2 class="popup__title popup__title_margin">Вы уверены?</h2>
-            <button class="popup__save popup__save_margin" type="submit">Да</button>
-         </div>
+        <div class="popup__confirmation-container">
+          <button class="popup__close" type="button"></button>
+          <h2 class="popup__title popup__title_margin">Вы уверены?</h2>
+          <form class="popup__form">
+            <button class="popup__save popup__save_margin" type="submit">
+              Да
+            </button>
+          </form>
+        </div>
       </div>
       <div class="popup popup_view-avatar">
-         <div class="popup__avatar-container">
-            <button class="popup__close" type="button"></button>
-            <h2 class="popup__title">Обновить аватар</h2>
-            <form class="popup__form" name="editAvatarForm" id="editFormAvatar" novalidate>
-               <label class="popup__label">
-                  <input id="nameInputAvatar" class="popup__input popup__input_type_link-avatar popup__input_type_error" name="avatar" type="url" placeholder="Введите ссылку URL" required>
-                  <span class="nameInputAvatar-error popup__error">Заполните это поле</span>
-               </label>
-               <button class="popup__save popup__save_disabled" type="submit" disabled>Сохранить</button>
-            </form>
-         </div>
+        <div class="popup__avatar-container">
+          <button class="popup__close" type="button"></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form
+            class="popup__form"
+            name="editAvatarForm"
+            id="editFormAvatar"
+            novalidate
+          >
+            <label class="popup__label">
+              <input
+                id="nameInputAvatar"
+                class="popup__input popup__input_type_link-avatar popup__input_type_error"
+                name="avatar"
+                type="url"
+                placeholder="Введите ссылку URL"
+                required
+              />
+              <span class="nameInputAvatar-error error"
+                >Заполните это поле</span
+              >
+            </label>
+            <button
+              class="popup__save popup__save_disabled"
+              type="submit"
+              disabled
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
       </div>
       <!-- конец POPUP -->
-   </main>
-   <!-- конец CONTENT -->
-   <!-- начало FOOTER -->
-   <footer class="footer">
+    </main>
+    <!-- конец CONTENT -->
+    <!-- начало FOOTER -->
+    <footer class="footer">
       <p class="footer__copyright">&copy; 2023. Горгуленко Анна</p>
-   </footer>
-   <!-- конец FOOTER -->
-</body>
-
+    </footer>
+    <!-- конец FOOTER -->
+  </body>
 </html>
