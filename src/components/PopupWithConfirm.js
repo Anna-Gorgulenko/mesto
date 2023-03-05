@@ -1,18 +1,36 @@
 import Popup from "./Popup.js"
 
-export default class PopupConfirmation extends Popup {
-  constructor(popup, handleSubmit) {
-    super(popup)
-    this._handleSubmit = handleSubmit
-    this._popupForm = this._popup.querySelector(".popup__form")
-    this._popupForm.addEventListener("submit", (evt) => {
-      evt.preventDefault()
-      this._handleSubmit(this._card)
-    })
-  }
+export default class PopupWithConfirm extends Popup {
+   constructor(selector, clickCardDeleteHandler) {
+      super(selector);
+      this._saveBtn = this._popup.querySelector('.popup__save');
+      this._initialSaveBtnText = this._saveBtn.textContent;
+      this._currentCardId = null;
+      this._clickCardDeleteHandler = clickCardDeleteHandler;
+      this._currentElementToDelete = null;
+   }
 
-  open(card) {
-    this._card = card
-    super.open()
-  }
-}
+   openPopup = (id, elementToDelete) => {
+      this._popup.classList.add('popup_opened')
+      document.addEventListener('keydown', this._closeByEscape)
+      this._currentCardId = id;
+      this._currentElementToDelete = elementToDelete;
+   }
+
+   startSaving() {
+      this._saveBtn.textContent = 'Удаление...';
+   }
+
+   confirmDeletion() {
+      this._currentElementToDelete.remove();
+   }
+
+   endSaving() {
+      this._saveBtn.textContent = this._initialSaveBtnText;
+   }
+
+   setEventListeners() {
+      super.setEventListeners();
+      this._saveBtn.addEventListener('click', () => { this._clickCardDeleteHandler(this._currentCardId) });
+   }
+} 
