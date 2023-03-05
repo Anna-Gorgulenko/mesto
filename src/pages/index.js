@@ -231,7 +231,7 @@ openAvatarPopupButton.addEventListener('click', () => {avatarPopup.openPopup()})
 const avatarForm = document.getElementById('editFormAvatar');
 
 
-// ИНИЦИАЛИЗАЦИЯ ФОРМ
+// ИНИЦИАЛИЗАЦИЯ  ФОРМ
 
 const formAddEx = new FormValidator(formClassSelectors, formAdd);
 formAddEx.enableValidation();
