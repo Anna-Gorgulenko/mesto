@@ -102,7 +102,7 @@ export default class Api {
       });
    }
 
-   /* Обновление аватара пользователя */
+   /* Обновление аватара пользователя  */
    changeUserAvatar(avatar) {
       return fetch(`${this._baseUrl}/users/me/avatar`, {
          method: 'PATCH',
