@@ -20,9 +20,4 @@ export default class UserInfo {
    setAvatar = (avatarUrl) => {
       this._avatar.src = avatarUrl;
    }
-<<<<<<< HEAD
-   
 }
-=======
-}
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1

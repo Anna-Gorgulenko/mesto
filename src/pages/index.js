@@ -24,11 +24,7 @@ const api = new Api({
 
 // ИНФОРМАЦИЯ ОБ ПРОФАЙЛЕ -------------
 
-<<<<<<< HEAD
-// открытие попапа редактирования инфо об  профайле
-=======
 // открытие попапа редактирования инфо об профайле
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
 const aboutMeButton = document.getElementById('myBtn');
 const formAbout = document.getElementById('editForm');
 const formAboutNameInput = document.getElementById('nameInput');
@@ -45,14 +41,13 @@ const submitHandlerToFormAbout = (evt, data) => {
         .then((result) => {
             console.log(result, 'changeUserInfo');
             userInfo.setUserInfo({name: result.name, job: result.about});
+            aboutPopup.closePopup();
         })
         .catch((err) => {
             console.log(err); // выведем ошибку в консоль
-        
         })
         .finally(() => {
             aboutPopup.endSaving();
-            aboutPopup.closePopup();
         })
 };
 
@@ -67,18 +62,29 @@ const userInfo = new UserInfo({
     avatarSelector: '.profile__avatar',
 })
 
-// загрузка данных профайла с сервера
-api.getUserInfo()
-  .then((result) => {
-    console.log(result, 'getUserInfo');
-    myId = result._id;
-    userInfo.setUserInfo({name: result.name, job: result.about});
-    userInfo.setAvatar(result.avatar);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  }); 
+const cardsFromServer = new Section({
+    renderer: (element) => {
+        const card = createCard(element);
+        cardsFromServer.addItem(card);
+    },
+}, '#elements-article');
 
+Promise.all([ //в Promise.all передаем массив промисов которые нужно выполнить
+    api.getUserInfo(),
+    api.getInitialCards()
+])
+    .then((values)=>{ //попадаем сюда когда оба промиса будут выполнены
+        console.log(values[0], 'getUserInfo');
+        myId = values[0]._id;
+        userInfo.setUserInfo({name: values[0].name, job: values[0].about});
+        userInfo.setAvatar(values[0].avatar);
+
+        console.log(values[1], 'getInitialCards');
+        cardsFromServer.renderItems(values[1]);
+})
+.catch((err)=>{ //попадаем сюда если один из промисов завершаться ошибкой
+  console.log(err);
+}) 
 
 
 // ОТКРЫТИЕ МОДАЛЬНОЙ ГАЛЕРЕИ ---------------
@@ -88,8 +94,6 @@ popupGallery.setEventListeners();
 
 
 // ОТРИСОВКА КАРТОЧЕК --------------
-
-const cardsParent = document.getElementById('elements-article');
 
 const deleteCard = (id) => {
 
@@ -109,22 +113,24 @@ const deleteCard = (id) => {
     })
 }
 
-const addLikeToCard = (id, setLikeCallback) => {
+const addLikeToCard = (id, setLikeCallback, toggleLikeClass) => {
     api.addLikeToCard(id)
     .then((result) => {
         console.log(result, 'addLikeToCard');
         setLikeCallback(result.likes.length);
+        toggleLikeClass();
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
     })
 }
 
-const deleteLikeFromCard = (id, setLikeCallback) => {
+const deleteLikeFromCard = (id, setLikeCallback, toggleLikeClass) => {
     api.deleteLikeFromCard(id)
     .then((result) => {
         console.log(result, 'deleteLikeFromCard');
         setLikeCallback(result.likes.length);
+        toggleLikeClass();
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
@@ -137,26 +143,6 @@ confirmDeletePopup.setEventListeners();
 const createCard = (item) => {
     return new Card('#tmp', item, popupGallery.openPopup, myId, confirmDeletePopup.openPopup, addLikeToCard, deleteLikeFromCard).generateCard();
 }
-
-let cardsFromServer = [];
-
-api.getInitialCards()
-  .then((result) => {
-    console.log(result, 'getInitialCards');
-    cardsFromServer = new Section({
-        data: result,
-        renderer: (element) => {
-            const card = createCard(element);
-            cardsFromServer.addItem(card);
-        },
-    }, '#elements-article');
-    cardsFromServer.renderItems();
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  }); 
-
-
 
 // ДОБАВЛЕНИЕ КАРТОЧЕК ЧЕРЕЗ ФОРМУ ---------------
 
@@ -235,11 +221,7 @@ openAvatarPopupButton.addEventListener('click', () => {avatarPopup.openPopup()})
 const avatarForm = document.getElementById('editFormAvatar');
 
 
-<<<<<<< HEAD
 // ИНИЦИАЛИЗАЦИЯ ФОРМ
-=======
-// ИНИЦИАЛИЗАЦИЯ  ФОРМ
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
 
 const formAddEx = new FormValidator(formClassSelectors, formAdd);
 formAddEx.enableValidation();
@@ -248,8 +230,4 @@ const formAboutEx = new FormValidator(formClassSelectors, formAbout);
 formAboutEx.enableValidation();
 
 const formAvatarEx = new FormValidator(formClassSelectors, avatarForm);
-<<<<<<< HEAD
 formAvatarEx.enableValidation();
-=======
-formAvatarEx.enableValidation();
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1

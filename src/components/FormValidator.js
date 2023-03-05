@@ -3,7 +3,7 @@ export default class FormValidator {
       this._data = data;
       this._form = form;
 
-      this._initInnerElements(); // определение  внутренних элементов формы
+      this._initInnerElements(); // определение внутренних элементов формы
    }
 
    _initInnerElements() {
@@ -71,8 +71,4 @@ export default class FormValidator {
     }; 
 
    enableValidation = () => { this._setEventListeners() };
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1

@@ -7,16 +7,10 @@ export default class PopupWithForm extends Popup {
       this._form = this._popup.querySelector('.popup__form');
       this._saveBtn = this._popup.querySelector('.popup__save');
       this._initialSaveBtnText = this._saveBtn.textContent;
+      this._inputList = this._form.querySelectorAll('.popup__input');
    }
 
    _getInputValues = () => {
-<<<<<<< HEAD
-      // достаём все элементы  полей
-=======
-      // достаём все элементы полей
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
-      this._inputList = this._form.querySelectorAll('.popup__input');
-
       // создаём пустой объект
       this._formValues = {};
 
@@ -49,8 +43,4 @@ export default class PopupWithForm extends Popup {
          this._submitCallback(evt, this._getInputValues());
       })
    }
-<<<<<<< HEAD
 } 
-=======
-} 
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1

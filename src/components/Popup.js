@@ -29,9 +29,4 @@ export default class Popup {
          }
      })
    }
-<<<<<<< HEAD
-   
 }
-=======
-}
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1

@@ -26,7 +26,8 @@
       <section class="profile">
          <div class="profile__container">
             <div class="profile__wrapper-relative">
-               <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Анна-разработчик">
+            <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>"
+               alt="Анна-разработчик">
                <button class="profile__edit-avatar" type="button"></button>
             </div>
             <div class="profile__info">
@@ -37,7 +38,7 @@
          </div>
          <button class="profile__add-button" type="button" id="add-card"></button>
       </section>
-      <!-- конец  PROFILE -->
+      <!-- конец PROFILE -->
       <!-- начало ELEMENTS -->
       <section class="elements" id="elements-article"></section>
       <template id="tmp">
@@ -113,8 +114,7 @@
             <h2 class="popup__title">Обновить аватар</h2>
             <form class="popup__form" name="editAvatarForm" id="editFormAvatar" novalidate>
                <label class="popup__label">
-                  <input id="nameInputAvatar" class="popup__input popup__input_type_link-avatar popup__input_type_error"
-                     name="avatar" type="url" placeholder="Введите ссылку URL" required>
+                  <input id="nameInputAvatar" class="popup__input popup__input_type_link-avatar popup__input_type_error" name="avatar" type="url" placeholder="Введите ссылку URL" required>
                   <span class="nameInputAvatar-error popup__error">Заполните это поле</span>
                </label>
                <button class="popup__save popup__save_disabled" type="submit" disabled>Сохранить</button>

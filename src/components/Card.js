@@ -42,33 +42,31 @@ export default class Card {
 
    _toggleLikeBtnClass() {
       if (this._likeBtn.classList.contains('element__like-button_active')) {
-         this._clickRemoveLikehandler(this._itemData._id, this.setLikesCounter);
+         this._clickRemoveLikehandler(this._itemData._id, this.setLikesCounter, () => {this._likeBtn.classList.toggle('element__like-button_active')});
       } else {
-         this._clickAddLikeHandler(this._itemData._id, this.setLikesCounter);
+         this._clickAddLikeHandler(this._itemData._id, this.setLikesCounter, () => {this._likeBtn.classList.toggle('element__like-button_active')});
       }
-      this._likeBtn.classList.toggle('element__like-button_active');
    }
 
    _setEventListeners = () => {
       this._image.addEventListener('click', () => { this._clickImageHandler(this._itemData.name, this._itemData.link) });
-      this._basketBtn.addEventListener('click', () => {this._clickDeleteHandler(this._itemData._id, this._article)});
+      this._basketBtn.addEventListener('click', () => {this._clickDeleteHandler(this._itemData._id, this._deleteCard)});
       this._likeBtn.addEventListener('click', () => {this._toggleLikeBtnClass()});
+   }
+
+   _deleteCard = () => {
+      this._article.remove();
    }
 
    generateCard() {
       this._article = this._getTemplate(); // склонировали разметку карточки и сохранили в _article
       this._initInnerElements(); // определяем внутренние элементы
       this._setImageSrcAndAlt(); // подставляем src и alt для изображения
-<<<<<<< HEAD
-      this._setTitleText(); // подставляем текст  в заголовок
-=======
       this._setTitleText(); // подставляем текст в заголовок
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
       this.setLikesCounter(this._itemData.likes.length);
       this._setEventListeners(); // установим обработчики события
       if (this._itemData.likes.some((like) => like._id === this._userId)) this._likeBtn.classList.add('element__like-button_active');
       if (this._userId !== this._itemData.owner._id ) this._basketBtn.remove();
       return this._article
    }
-
 }

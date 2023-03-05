@@ -10,11 +10,10 @@ export default class PopupWithConfirm extends Popup {
       this._currentElementToDelete = null;
    }
 
-   openPopup = (id, elementToDelete) => {
-      this._popup.classList.add('popup_opened')
-      document.addEventListener('keydown', this._closeByEscape)
+   openPopup = (id, deleteCardCallback) => {
+      super.openPopup();
       this._currentCardId = id;
-      this._currentElementToDelete = elementToDelete;
+      this._deleteCardCallback = deleteCardCallback;
    }
 
    startSaving() {
@@ -22,7 +21,7 @@ export default class PopupWithConfirm extends Popup {
    }
 
    confirmDeletion() {
-      this._currentElementToDelete.remove();
+      this._deleteCardCallback();
    }
 
    endSaving() {
@@ -33,9 +32,4 @@ export default class PopupWithConfirm extends Popup {
       super.setEventListeners();
       this._saveBtn.addEventListener('click', () => { this._clickCardDeleteHandler(this._currentCardId) });
    }
-<<<<<<< HEAD
-   
 } 
-=======
-} 
->>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
