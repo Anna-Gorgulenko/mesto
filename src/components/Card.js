@@ -59,7 +59,11 @@ export default class Card {
       this._article = this._getTemplate(); // склонировали разметку карточки и сохранили в _article
       this._initInnerElements(); // определяем внутренние элементы
       this._setImageSrcAndAlt(); // подставляем src и alt для изображения
+<<<<<<< HEAD
       this._setTitleText(); // подставляем текст  в заголовок
+=======
+      this._setTitleText(); // подставляем текст в заголовок
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
       this.setLikesCounter(this._itemData.likes.length);
       this._setEventListeners(); // установим обработчики события
       if (this._itemData.likes.some((like) => like._id === this._userId)) this._likeBtn.classList.add('element__like-button_active');

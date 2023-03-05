@@ -4,7 +4,11 @@ export default class Api {
      this._headers = options.headers;
    }
  
+<<<<<<< HEAD
    /* Загрузка информации о  пользователе с сервера */
+=======
+   /* Загрузка информации о пользователе с сервера */
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
    getUserInfo() {
      return fetch(`${this._baseUrl}/users/me `, {
       headers: { authorization: this._headers.authorization },
@@ -102,7 +106,11 @@ export default class Api {
       });
    }
 
+<<<<<<< HEAD
    /* Обновление аватара пользователя */
+=======
+   /* Обновление аватара пользователя  */
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
    changeUserAvatar(avatar) {
       return fetch(`${this._baseUrl}/users/me/avatar`, {
          method: 'PATCH',
@@ -119,4 +127,8 @@ export default class Api {
 
 
  }
+<<<<<<< HEAD
  
+=======
+ 
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1

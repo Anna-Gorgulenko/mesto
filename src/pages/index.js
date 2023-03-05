@@ -24,7 +24,11 @@ const api = new Api({
 
 // ИНФОРМАЦИЯ ОБ ПРОФАЙЛЕ -------------
 
+<<<<<<< HEAD
 // открытие попапа редактирования инфо об  профайле
+=======
+// открытие попапа редактирования инфо об профайле
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
 const aboutMeButton = document.getElementById('myBtn');
 const formAbout = document.getElementById('editForm');
 const formAboutNameInput = document.getElementById('nameInput');
@@ -231,7 +235,11 @@ openAvatarPopupButton.addEventListener('click', () => {avatarPopup.openPopup()})
 const avatarForm = document.getElementById('editFormAvatar');
 
 
+<<<<<<< HEAD
 // ИНИЦИАЛИЗАЦИЯ ФОРМ
+=======
+// ИНИЦИАЛИЗАЦИЯ  ФОРМ
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
 
 const formAddEx = new FormValidator(formClassSelectors, formAdd);
 formAddEx.enableValidation();
@@ -240,4 +248,8 @@ const formAboutEx = new FormValidator(formClassSelectors, formAbout);
 formAboutEx.enableValidation();
 
 const formAvatarEx = new FormValidator(formClassSelectors, avatarForm);
+<<<<<<< HEAD
 formAvatarEx.enableValidation();
+=======
+formAvatarEx.enableValidation();
+>>>>>>> d763bb0edbaec05c7b9ce69ead5d579010fd73d1
