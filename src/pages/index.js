@@ -39,7 +39,7 @@ const submitHandlerToFormAbout = (evt, data) => {
     
     api.changeUserInfo(data[formAboutNameInput.getAttribute('name')], data[formAboutJobInput.getAttribute('name')])
         .then((result) => {
-            console.log(result, 'changeUserInfo');
+            // console.log(result, 'changeUserInfo');
             userInfo.setUserInfo({name: result.name, job: result.about});
             aboutPopup.closePopup();
         })
@@ -74,12 +74,12 @@ Promise.all([ //в Promise.all передаем массив промисов к
     api.getInitialCards()
 ])
     .then((values)=>{ //попадаем сюда когда оба промиса будут выполнены
-        console.log(values[0], 'getUserInfo');
+        // console.log(values[0], 'getUserInfo');
         myId = values[0]._id;
         userInfo.setUserInfo({name: values[0].name, job: values[0].about});
         userInfo.setAvatar(values[0].avatar);
 
-        console.log(values[1], 'getInitialCards');
+        // console.log(values[1], 'getInitialCards');
         cardsFromServer.renderItems(values[1]);
 })
 .catch((err)=>{ //попадаем сюда если один из промисов завершаться ошибкой
@@ -100,23 +100,21 @@ const deleteCard = (id) => {
     confirmDeletePopup.startSaving();
 
     api.deleteCard(id)
-    .then((result) => {
-        console.log(result, 'deleteCard');
+    .then(() => {
         confirmDeletePopup.confirmDeletion();
+        confirmDeletePopup.closePopup();
     })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
     })
     .finally(() => {
         confirmDeletePopup.endSaving();
-        confirmDeletePopup.closePopup();
     })
 }
 
 const addLikeToCard = (id, setLikeCallback, toggleLikeClass) => {
     api.addLikeToCard(id)
     .then((result) => {
-        console.log(result, 'addLikeToCard');
         setLikeCallback(result.likes.length);
         toggleLikeClass();
     })
@@ -128,7 +126,6 @@ const addLikeToCard = (id, setLikeCallback, toggleLikeClass) => {
 const deleteLikeFromCard = (id, setLikeCallback, toggleLikeClass) => {
     api.deleteLikeFromCard(id)
     .then((result) => {
-        console.log(result, 'deleteLikeFromCard');
         setLikeCallback(result.likes.length);
         toggleLikeClass();
     })
@@ -160,10 +157,10 @@ const submitHandlerToFormAdd = (evt, data) => {
     
     api.addCard(data[formAddNameInput.getAttribute('name')], data[ formAddLinkInput.getAttribute('name') ])
         .then((result) => {
-            console.log(result, 'addCard');
             //отрисовка карточки
             const newCard = createCard(result);
             cardsFromServer.addItem(newCard);
+            cardPopup.closePopup();
         })
         .catch((err) => {
             console.log(err); // выведем ошибку в консоль
@@ -171,7 +168,6 @@ const submitHandlerToFormAdd = (evt, data) => {
         })
         .finally(() => {
             cardPopup.endSaving();
-            cardPopup.closePopup();
         })
 };
 
@@ -202,15 +198,14 @@ const submitHandlerToFormAvatar = (evt, data) => {
     
     api.changeUserAvatar(data['avatar'])
         .then((result) => {
-            console.log(result, 'changeUserAvatar');
             userInfo.setAvatar(result.avatar);
+            avatarPopup.closePopup();
         })
         .catch((err) => {
             console.log(err); // выведем ошибку в консоль
         })
         .finally(() => {
             avatarPopup.endSaving();
-            avatarPopup.closePopup();
         })
 };
 
